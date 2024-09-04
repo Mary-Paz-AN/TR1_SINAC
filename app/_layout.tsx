@@ -7,9 +7,11 @@ const StackLayout = () => {
     <Stack
       screenOptions={{
         headerTransparent: false,
-        header: () => <Header />, 
+        header: () => <Header />,
       }}
-    />
+    >
+     
+    </Stack>
   );
 };
 
