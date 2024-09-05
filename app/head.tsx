@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, Text, TouchableOpacity, View, Image, TextInput, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import { Link } from 'expo-router';
 
 const Header = () => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -27,20 +27,24 @@ const Header = () => {
                         <Ionicons name="menu" size={32} color="black" />
                     </TouchableOpacity>
                     ) : (
-                    <TouchableOpacity onPress={() => {}} style={{ margin: 20 }}>
-                        <Image
-                            source={require('../assets/images/sinac.jpg')}
-                            style={{ width: 60, height: 60 }}
-                        />
-                    </TouchableOpacity>
+                    <Link href="/" asChild>
+                        <TouchableOpacity onPress={() => {}} style={{ margin: 20 }}>
+                            <Image
+                                source={require('../assets/images/sinac.jpg')}
+                                style={{ width: 60, height: 60 }}
+                            />
+                        </TouchableOpacity>
+                    </Link>
                 )}
                 <View style={styles.headerRightContainer}>
                     {!isSmallScreen && (
                         <>
-                        <TouchableOpacity style={styles.subMenuItem} onPress={() => {}}>
-                            
-                            <Text style={styles.menuItem}>Areas Protegidas</Text>
-                        </TouchableOpacity>
+                        <Link href="/nationalParks" asChild>
+                            <TouchableOpacity style={styles.subMenuItem} onPress={() => {}}>
+                                
+                                <Text style={styles.menuItem}>Areas Protegidas</Text>
+                            </TouchableOpacity>
+                        </Link>
 
                         <TouchableOpacity style={styles.subMenuItem} onPress={() => {}}>
                             
@@ -71,9 +75,11 @@ const Header = () => {
             </View>
             {isSmallScreen && isMenuOpen && (
                 <View style={styles.menuSandwich}>
-                    <TouchableOpacity onPress={() => {}}>
-                        <Text style={styles.fontSandwich}>Areas Protegidas</Text>
-                    </TouchableOpacity>
+                    <Link href="/nationalParks" asChild>
+                        <TouchableOpacity  onPress={() => {}}>
+                            <Text style={styles.fontSandwich}>Areas Protegidas</Text>
+                        </TouchableOpacity>
+                    </Link>
 
                     <TouchableOpacity onPress={() => {}}>
                         <Text style={styles.fontSandwich}>Conozcanos</Text>
