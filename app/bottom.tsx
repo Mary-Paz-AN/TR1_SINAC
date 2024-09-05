@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
+
 const Bottom = () => {
+  const { width } = useWindowDimensions(); // Obtener el ancho de la pantalla
+
+  const isSmallScreen = width < 600;
   return (
-    <View style={styles.footer}>
+    <View style={[styles.footer, { flexDirection: isSmallScreen ? 'column' : 'row' }]}>
         <View style={styles.footerSection}>
           <Text style={styles.footerTitle}>INFORMACION INSTITUCIONAL</Text>
           <Text style={styles.footerText}>Transparencia</Text>
@@ -27,7 +31,7 @@ const Bottom = () => {
           <Text style={styles.footerText}>Enlaces de interés</Text>
           <Text style={styles.footerText}>Noticias</Text>
           <Text style={styles.footerTitle}>REDES SOCIALES</Text>
-          <View style={{ flexDirection: 'row', marginTop: 15 }}>
+          <View style={{ flexDirection: 'row'}}>
             <FontAwesome style={{ marginRight: 15 }} name="youtube" size={24} color="white" />
             <FontAwesome style={{ marginRight: 15 }} name="facebook" size={24} color="white" />
             <FontAwesome style={{ marginRight: 15 }} name="twitter" size={24} color="white" />
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#1a1a1a',
-        padding: 20,
+        padding: 40,
     },
     footerSection: {
         flex: 1,

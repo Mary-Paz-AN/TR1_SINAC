@@ -6,7 +6,8 @@ import { Link } from 'expo-router';
 const Header = () => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [hoveredItem, setHoveredItem] = useState<string | null>(null); // Agregar el tipo para hoveredItem
+    const [hoveredItem, setHoveredItem] = useState<string | null>(null); 
+    const [dropdownOpen, setDropdownOpen] = useState<string | null>(null); 
 
     useEffect(() => {
         const updateLayout = () => {
@@ -20,15 +21,30 @@ const Header = () => {
         return () => subscription?.remove();
     }, []);
 
-    const isWeb = Platform.OS === 'web'; // Detecta si está en un entorno web
+    const isWeb = Platform.OS === 'web';
+
+    
 
     return (
         <>
             <View style={styles.menuPricipal}>
                 {isSmallScreen ? (
+                    <>
                     <TouchableOpacity onPress={() => setIsMenuOpen(!isMenuOpen)} style={{ marginLeft: 20 }}>
                         <Ionicons name="menu" size={32} color="black" />
                     </TouchableOpacity>
+                        <Link href="/" asChild>
+                        <TouchableOpacity onPress={() => {}} style={{ margin: 20 }}>
+                            <Image
+                                source={require('../assets/images/sinac.jpg')}
+                                style={{ width: 60, height: 60 }}
+                            />
+                        </TouchableOpacity>
+                    </Link>
+
+                    </>
+                    
+                
                 ) : (
                     <Link href="/" asChild>
                         <TouchableOpacity onPress={() => {}} style={{ margin: 20 }}>
@@ -41,6 +57,8 @@ const Header = () => {
                     </Link>
                     
                 )}
+
+                 {/* WEB*/}
                 <View style={styles.headerRightContainer}>
                     {!isSmallScreen && (
                         <>
@@ -147,28 +165,73 @@ const Header = () => {
                     </View>
                 </View>
             </View>
+
+            {/* Menú hambuerguesa*/}
             
             {isSmallScreen && isMenuOpen && (
                 <View style={styles.menuSandwich}>
-                    <Link href="/nationalParks" asChild>
-                        <TouchableOpacity onPress={() => {}}>
-                            <Text style={styles.fontSandwich}>Áreas Protegidas</Text>
-                        </TouchableOpacity>
-                    </Link>
-                    
+                <TouchableOpacity onPress={() => setDropdownOpen(dropdownOpen === 'areasProtegidas' ? null : 'areasProtegidas')}>
+                    <Text style={styles.fontSandwich}>Áreas Protegidas</Text>
+                    {dropdownOpen === 'areasProtegidas' && (
+                        <View >
+                            <Text style={styles.submenuOption}>Areas Conservadas</Text>
+                            <Text style={styles.submenuOption}>Areas Silvestes Protegidas</Text>
+                            <Link href="/nationalParks" asChild>
+                                <TouchableOpacity onPress={() => {}}>
+                                    <Text style={styles.submenuOption}>Parques Nacionales y más</Text>
+                                </TouchableOpacity>
+                            </Link>
+                            <Text style={styles.submenuOption}>Vida Silvestre</Text>
+                        </View>
+                    )}
+                </TouchableOpacity>
+                
 
-                    <TouchableOpacity onPress={() => {}}>
-                        <Text style={styles.fontSandwich}>Conozcanos</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={() => setDropdownOpen(dropdownOpen === 'conozca' ? null : 'conozca')}>
+                    <Text style={styles.fontSandwich}>Conozca</Text>
+                    {dropdownOpen === 'conozca' && (
+                        <View >
+                            <Text style={styles.submenuOption}>Reservas de Biosfera</Text>
+                            <Text style={styles.submenuOption}>Turismo Sostenible</Text>
+                            <Text style={styles.submenuOption}>Foto 360</Text>
+                            <Text style={styles.submenuOption}>Participacion y Gobernanza</Text>
+                        </View>
+                    )}
 
-                    <TouchableOpacity onPress={() => {}}>
-                        <Text style={styles.fontSandwich}>Documentación y Normativa</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={() => setDropdownOpen(dropdownOpen === 'documentacion' ? null : 'documentacion')}>
+                    <Text style={styles.fontSandwich}>Documentación y Normativa</Text>
+                    {dropdownOpen === 'documentacion' && (
+                    <View>
+                        <Text style={styles.submenuOption}>Documentación</Text>
+                        <Text style={styles.submenuOption}>Normativa Jurídica</Text>
+                        <Text style={styles.submenuOption}>Planes de Manejo</Text>
+                        <Text style={styles.submenuOption}>Publicaciones</Text>
+                    </View>
+                )}
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={() => setDropdownOpen(dropdownOpen === 'tramites' ? null : 'tramites')}>
+                    <Text style={styles.fontSandwich}>Trámites y consultas</Text>
+                    {dropdownOpen === 'tramites' && (
+                        <View>
+                            <Text style={styles.submenuOption}>Compra y Reserva en Linea</Text>
+                            <Text style={styles.submenuOption}>Consultas</Text>
+                            <Text style={styles.submenuOption}>Contraloría de Servicios</Text>
+                            <Text style={styles.submenuOption}>Gestión de Servicios Ecosistémicos</Text>
+                            <Text style={styles.submenuOption}>Permisos CITES</Text>
+                            <Text style={styles.submenuOption}>Permisos de Investigacion</Text>
+                            <Text style={styles.submenuOption}>Permisos Forestales</Text>
+                            <Text style={styles.submenuOption}>Requisitos de Certificiciones de Visados</Text>
+                            <Text style={styles.submenuOption}>SITADA Denuncia Ambiental</Text>
+                            <Text style={styles.submenuOption}>Trámites de Vida Silvestre</Text>
+                            <Text style={styles.submenuOption}>Trámites digitales</Text>
+                        </View>
+                    )}
                     </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => {}}>
-                        <Text style={styles.fontSandwich}>Trámites y consultas</Text>
-                    </TouchableOpacity>
-                </View>
+                
+            </View>
             )}
         </>
     );
@@ -181,6 +244,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 20,
         backgroundColor: '#fff',
+     
     },
     headerRightContainer: {
         flexDirection: 'row',
@@ -206,22 +270,21 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },  
         shadowOpacity: 10.25,          
         shadowRadius: 10.5,  
-
-       
-     
     },
     dropdownItem: {
         padding: 10,
         width:'100%',
         
     },
-    hovered: {
-        borderBottomWidth: 2,
-        borderBottomColor: '#000',
+    submenuOption: {
+        padding: 10,
+        fontSize: 16,
+
+       
+        
     },
-    hoveredText: {
-        color: '#000',
-    },
+  
+ 
     searchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -245,9 +308,10 @@ const styles = StyleSheet.create({
         top: 48,
         left: 0,
         right: 0,
-        backgroundColor: 'red',
+        backgroundColor: '#fff',
         padding: 20,
         zIndex: 10,
+        marginTop:35
     },
     fontSandwich: {
         fontSize: 18,
