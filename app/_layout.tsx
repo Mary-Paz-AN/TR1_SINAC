@@ -10,8 +10,8 @@ const StackLayout = () => {
         header: () => <Header />,
       }}
     >
-     
     </Stack>
+    
   );
 };
 
