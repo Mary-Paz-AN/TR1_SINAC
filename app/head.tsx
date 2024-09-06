@@ -8,6 +8,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hoveredItem, setHoveredItem] = useState<string | null>(null); 
     const [dropdownOpen, setDropdownOpen] = useState<string | null>(null); 
+    const [palabraBuscar, setPalabraBuscar] = useState('');
 
     useEffect(() => {
         const updateLayout = () => {
@@ -161,7 +162,14 @@ const Header = () => {
                             placeholder="Buscar...."
                             placeholderTextColor="#7d7d7d"
                             style={styles.searchInput}
+                            value={palabraBuscar}
+                            onChangeText={text => setPalabraBuscar(text)}
                         />
+                        <Link href={{ pathname: '/search', params: { search: palabraBuscar } }}>
+                        <TouchableOpacity>
+                            <Ionicons name="arrow-forward" size={20} color="#7d7d7d" />
+                        </TouchableOpacity>
+                        </Link>
                     </View>
                 </View>
             </View>
