@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, Dimensions, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Bottom from './bottom';
+
+const screenWidth = Dimensions.get('window').width;
+
 const NationalParks = () => {
     const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -136,6 +140,7 @@ const NationalParks = () => {
             </View>
             
             <View style={{height: 50}}></View>
+            <Bottom/>
         </ScrollView>
     );
 }
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#258d19',
+        backgroundColor: '#f7c644',
         marginLeft: 10,
         marginTop: 20,
         width: 210,
@@ -170,9 +175,9 @@ const styles = StyleSheet.create({
     }, 
     buttonText: {
         fontSize: 18,
-        fontWeight: 600,
+        fontWeight: 'bold',
         textAlign: 'center',
-        color: '#FFFFFF'
+        color: '#6d5b1c'
     },
     mainContainer: {
         flex: 1,
@@ -184,10 +189,12 @@ const styles = StyleSheet.create({
         flex: 1,               
         justifyContent: 'center',
         alignItems: 'center',
+        width: 310,
     },
     parkContainer: {
         flex: 3,    
-        justifyContent: 'center'
+        justifyContent: 'center',
+        minWidth: 300
     },
     image: {
         height: 200,
@@ -196,7 +203,7 @@ const styles = StyleSheet.create({
     tittlePark: {
         textAlign: 'left',
         fontSize: 24,
-        fontWeight: 700,
+        fontWeight: 'bold',
         color: '#4ea93b',
         marginBottom: 5,
         height: 'auto',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stack } from 'expo-router';
-import Header from './head'; 
+import Header from './head';
+
 
 const StackLayout = () => {
   return (
@@ -10,7 +11,6 @@ const StackLayout = () => {
         header: () => <Header />,
       }}
     >
-     
     </Stack>
   );
 };
