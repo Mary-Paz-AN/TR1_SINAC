@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, ImageBackground, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { Link } from 'expo-router';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Feather from '@expo/vector-icons/Feather';
@@ -54,9 +55,11 @@ const HomeScreen = () => {
                 <Text style={styles.parquesInfo}>Sitio donde el SINAC dispone de manera digital los documentos que produce en función de sus competencias en materia de biodiversidad: recursos naturales, vida silvestre, recursos forestales, áreas silvestres protegidas, cuencas hidrográficas, sistemas hídricos y en materia de la gestión institucional administrativa.</Text>
             </View>
             <View style={{ flexDirection: 'row'}}>
-                <TouchableOpacity style={styles.buttonTuristica}>
-                    <Text style={styles.buttonText}>Descubra su Destino</Text>
-                </TouchableOpacity>
+                <Link href="/nationalParks" asChild>
+                    <TouchableOpacity style={styles.buttonTuristica}>
+                        <Text style={styles.buttonText}>Descubra su Destino</Text>
+                    </TouchableOpacity>
+                </Link>
                 <TouchableOpacity style={styles.buttonTuristica}>
                     <Text style={styles.buttonText}>Compra y Reverva en línea</Text>
                 </TouchableOpacity>
@@ -204,6 +207,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         flex:1,
         marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     // mas info
     container: {
@@ -246,6 +251,7 @@ const styles = StyleSheet.create({
     parquesInfo:{
         padding:30,
         textAlign:'center',
+        fontSize: 15
 
     },
     parquesTitle:{
